@@ -1,0 +1,1680 @@
+/* ==========================================================================
+   EJ KATE ALCOVER — NEON AESTHETIC PORTFOLIO STYLES
+   With 1.5s Shared-Element (FLIP-Style) Transition: Page 1 <-> Page 2 <-> Page 3
+   ========================================================================== */
+
+:root {
+  /* Neon Palette */
+  --neon-pink: #ff2a85;
+  --neon-pink-hover: #ff4797;
+  --neon-pink-dim: rgba(255, 42, 133, 0.45);
+  --neon-pink-subtle: rgba(255, 42, 133, 0.12);
+  --neon-text-glow: 0 0 8px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 45px rgba(255, 42, 133, 0.85);
+
+  /* Dark Ambient Backgrounds */
+  --bg-page: #020003;
+  --bg-frame: #060105;
+  --bg-wine: #12020a;
+
+  /* Typography */
+  --font-display: 'Bodoni Moda', 'Playfair Display', serif;
+  --font-sans: 'Outfit', sans-serif;
+  --font-logo: 'Syne', sans-serif;
+
+  /* Timing & Shared-Element Easing */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-shared: 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+  --transition-fade: 1.1s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(0px, 1.2vw, 16px);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   ROUNDED CINEMATIC SCREEN FRAME (STAGE)
+   ========================================================================== */
+
+.screen-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: clamp(14px, 2vw, 28px);
+  border: 1px solid rgba(255, 42, 133, 0.18);
+  box-shadow: 
+    0 0 50px rgba(0, 0, 0, 0.98),
+    inset 0 0 60px rgba(255, 42, 133, 0.03);
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 45%, #14020c 0%, #070105 45%, #020003 100%);
+  display: flex;
+  flex-direction: column;
+  transition: background var(--transition-shared);
+}
+
+.state-page-2.screen-frame {
+  background: radial-gradient(circle at 68% 45%, #16020e 0%, #070105 50%, #020003 100%);
+}
+
+.state-page-3.screen-frame,
+.state-page-4.screen-frame,
+.state-page-5.screen-frame {
+  background: radial-gradient(circle at 50% 40%, #16020e 0%, #070105 55%, #020003 100%);
+}
+
+/* ==========================================================================
+   TOP-RIGHT NAVIGATION & HEADER
+   ========================================================================== */
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  padding: clamp(1rem, 2vh, 1.6rem) clamp(1.5rem, 3.5vw, 3.5rem);
+}
+
+.navbar {
+  max-width: 1750px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.logo {
+  font-family: var(--font-logo);
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: #ffffff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.25s ease;
+  cursor: pointer;
+}
+
+.logo-dot {
+  color: var(--neon-pink);
+  text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.logo:hover {
+  opacity: 0.9;
+}
+
+/* Navigation Links in Row at Top Right */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.4rem, 2.4vw, 2.8rem);
+  list-style: none;
+  margin-left: auto;
+}
+
+.nav-link {
+  position: relative;
+  font-family: var(--font-sans);
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  transition: color 0.3s var(--ease-spring), text-shadow 0.3s var(--ease-spring);
+  cursor: pointer;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--neon-pink);
+  box-shadow: 0 0 8px var(--neon-pink);
+  border-radius: 2px;
+  transition: width 0.3s var(--ease-spring);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(255, 42, 133, 0.7);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Mobile Toggle */
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--neon-pink);
+  font-size: 1.35rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  text-shadow: 0 0 10px var(--neon-pink);
+}
+
+/* ==========================================================================
+   PAGE 1 DECORATIVE ELEMENTS (EXIT ON PAGE 2 & 3)
+   ========================================================================== */
+
+/* 4 Corner Sparkle Stars (✦) */
+.corner-star {
+  position: absolute;
+  color: var(--neon-pink);
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  line-height: 1;
+  text-shadow: 0 0 10px var(--neon-pink), 0 0 25px rgba(255, 42, 133, 0.85);
+  z-index: 40;
+  pointer-events: none;
+  user-select: none;
+  transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.8s ease;
+}
+
+.corner-star.top-left {
+  top: clamp(1.4rem, 2.5vh, 2rem);
+  left: clamp(1.4rem, 2.5vw, 2.2rem);
+}
+
+.corner-star.top-right {
+  top: clamp(1.4rem, 2.5vh, 2rem);
+  right: clamp(1.4rem, 2.5vw, 2.2rem);
+}
+
+.corner-star.bottom-left {
+  bottom: clamp(1.4rem, 2.5vh, 2.2rem);
+  left: clamp(1.4rem, 2.5vw, 2.2rem);
+}
+
+.corner-star.bottom-right {
+  bottom: clamp(1.4rem, 2.5vh, 2.2rem);
+  right: clamp(1.4rem, 2.5vw, 2.2rem);
+}
+
+/* Graceful Exit on Page 2, 3, 4 & 5 */
+.state-page-2 .corner-star,
+.state-page-3 .corner-star,
+.state-page-4 .corner-star,
+.state-page-5 .corner-star {
+  opacity: 0;
+  transform: scale(0.3);
+  pointer-events: none;
+}
+
+/* Side Vertical Accent Texts */
+.side-text {
+  position: absolute;
+  top: 50%;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  color: rgba(255, 42, 133, 0.5);
+  text-shadow: 0 0 8px rgba(255, 42, 133, 0.3);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 30;
+  transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.8s ease;
+}
+
+.side-left {
+  left: clamp(1.2rem, 2vw, 2rem);
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: center center;
+}
+
+.side-right {
+  right: clamp(1.2rem, 2vw, 2rem);
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: center center;
+}
+
+/* Graceful Exit on Page 2, 3, 4 & 5 */
+.state-page-2 .side-left,
+.state-page-3 .side-left,
+.state-page-4 .side-left,
+.state-page-5 .side-left {
+  opacity: 0;
+  transform: translateY(-50%) translateX(-35px) rotate(-90deg);
+}
+
+.state-page-2 .side-right,
+.state-page-3 .side-right,
+.state-page-4 .side-right,
+.state-page-5 .side-right {
+  opacity: 0;
+  transform: translateY(-50%) translateX(35px) rotate(90deg);
+}
+
+/* Bottom Social Pills Bar (Page 1) */
+.social-pills-bar {
+  position: absolute;
+  bottom: clamp(1.5rem, 3.2vh, 2.5rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  display: flex;
+  align-items: center;
+  gap: clamp(1.6rem, 3vw, 3rem);
+  z-index: 20;
+  opacity: 1;
+  transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.8s ease;
+}
+
+.social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--neon-pink);
+  color: #0c0309;
+  font-family: var(--font-sans);
+  font-size: clamp(0.78rem, 0.88vw, 0.86rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  padding: 0.55rem clamp(1.25rem, 1.6vw, 1.55rem);
+  border-radius: 9999px;
+  box-shadow: 0 0 18px rgba(255, 42, 133, 0.6);
+  transition: transform 0.25s var(--ease-spring), box-shadow 0.25s var(--ease-spring), background-color 0.25s ease;
+  white-space: nowrap;
+}
+
+.social-pill i {
+  font-size: 0.95rem;
+}
+
+.social-pill:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 0 30px rgba(255, 42, 133, 0.95), 0 4px 15px rgba(0, 0, 0, 0.4);
+  background: var(--neon-pink-hover);
+}
+
+/* Graceful Exit on Page 2, 3, 4 & 5 */
+.state-page-2 .social-pills-bar,
+.state-page-3 .social-pills-bar,
+.state-page-4 .social-pills-bar,
+.state-page-5 .social-pills-bar {
+  opacity: 0;
+  transform: translateX(-50%) translateY(45px);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   HERO CANVAS & AMBIENT GLOWS
+   ========================================================================== */
+
+.hero-canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.bg-waves {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.wave {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  transition: transform var(--transition-shared);
+}
+
+.wave-1 {
+  width: 70vw;
+  height: 60vh;
+  top: 20%;
+  left: -15vw;
+  background: radial-gradient(circle, rgba(255, 42, 133, 0.05) 0%, transparent 70%);
+}
+
+.wave-2 {
+  width: 65vw;
+  height: 65vh;
+  top: 15%;
+  right: -15vw;
+  background: radial-gradient(circle, rgba(255, 42, 133, 0.05) 0%, transparent 70%);
+}
+
+.center-magenta-glow {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(650px, 75vw);
+  height: min(650px, 75vw);
+  background: radial-gradient(circle, rgba(255, 42, 133, 0.12) 0%, rgba(140, 8, 65, 0.03) 45%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+  transition: left var(--transition-shared), transform var(--transition-shared), opacity var(--transition-fade);
+}
+
+.state-page-2 .center-magenta-glow {
+  left: 72%;
+  opacity: 0.18;
+}
+
+.state-page-3 .center-magenta-glow {
+  left: 50%;
+  opacity: 0.14;
+}
+
+/* ==========================================================================
+   STAGE NAME ARCHITECTURE: ROW 1 IS THE SHARED NAME ELEMENT
+   ========================================================================== */
+
+.hero-name-stage {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+  gap: clamp(0px, 0.4vh, 6px);
+  padding: 0 clamp(1rem, 3vw, 3rem);
+}
+
+.row1-anchor {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 1px;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ROW 1: The One & Only Shared Name Element for Page 1, 2 & 3 */
+.shared-name-row {
+  display: inline-block;
+  width: fit-content;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 8.4vw, 9.6rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: clamp(0.01em, 0.35vw, 0.03em);
+  color: var(--neon-pink);
+  text-shadow: none;
+  white-space: nowrap;
+  line-height: 0.90;
+  text-align: left;
+  opacity: 1;
+  z-index: 25;
+  transform: translate(0px, 0px);
+  transform-origin: top left;
+  will-change: transform, font-size, letter-spacing, opacity;
+  transition: 
+    transform var(--transition-shared),
+    font-size var(--transition-shared),
+    letter-spacing var(--transition-shared),
+    line-height var(--transition-shared),
+    opacity var(--transition-fade);
+}
+
+/* Page 2, 3 & 4: the giant hero name dissolves away entirely rather than
+   trying to dock in place — the About page shows its own compact two-line
+   name lockup instead (see .intro-name-lockup), so there's no duplicate
+   or overlapping name text on any of these pages. */
+.state-page-2 .shared-name-row,
+.state-page-3 .shared-name-row,
+.state-page-4 .shared-name-row,
+.state-page-5 .shared-name-row {
+  opacity: 0;
+  transform: translateY(-24px) scale(0.95);
+  pointer-events: none;
+}
+
+/* ROWS 2, 3, 4: Secondary Background Echoes (Dissolve on Page 2, 3, 4 & 5) */
+.secondary-name-rows {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0px, 0.4vh, 6px);
+  width: 100%;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s ease, transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.state-page-2 .secondary-name-rows,
+.state-page-3 .secondary-name-rows,
+.state-page-4 .secondary-name-rows,
+.state-page-5 .secondary-name-rows {
+  opacity: 0;
+  transform: translateY(35px);
+  pointer-events: none;
+}
+
+.name-row {
+  display: inline-block;
+  width: fit-content;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 8.4vw, 9.6rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: clamp(0.01em, 0.35vw, 0.03em);
+  white-space: nowrap;
+  line-height: 0.90;
+  text-align: center;
+}
+
+/* Row 2: Medium Opacity Solid Neon Pink */
+.name-row.row-2 {
+  color: var(--neon-pink);
+  opacity: 0.48;
+  text-shadow: none;
+}
+
+/* Row 3: Soft Dimmer Solid Neon Pink */
+.name-row.row-3 {
+  color: var(--neon-pink);
+  opacity: 0.20;
+  text-shadow: none;
+}
+
+/* Row 4: Merges Directly into Background */
+.name-row.row-4 {
+  color: var(--neon-pink);
+  opacity: 0.07;
+  text-shadow: none;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.2) 30%, transparent 70%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.2) 30%, transparent 70%);
+}
+
+/* ==========================================================================
+   SHARED-ELEMENT PORTRAIT (CENTER -> RIGHT -> SMALL CORNER TRANSITION)
+   ========================================================================== */
+
+.hero-photo-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 92vh;
+  max-height: calc(100vh - 40px);
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
+  transition: transform var(--transition-shared), opacity var(--transition-fade);
+  will-change: transform, opacity;
+}
+
+/* Physical Movement: Portrait shifts to the right on Page 2 */
+.state-page-2 .hero-photo-wrapper {
+  transform: translateX(calc(-50% + 23vw));
+  opacity: 1;
+}
+
+/* Page 3, 4 & 5: Portrait exits completely so the grid/carousel/skills has the full stage */
+.state-page-3 .hero-photo-wrapper,
+.state-page-4 .hero-photo-wrapper,
+.state-page-5 .hero-photo-wrapper {
+  transform: translateX(calc(-50% + 55vw)) scale(0.5);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Cutout Photo with Crisp Neon Rim Silhouette Light & Deep Drop Shadows */
+.hero-photo {
+  position: relative;
+  height: 100%;
+  width: auto;
+  max-width: 95vw;
+  object-fit: contain;
+  object-position: bottom center;
+  z-index: 2;
+  filter: 
+    drop-shadow(0 0 7px rgba(255, 42, 133, 0.85))
+    drop-shadow(0 0 18px rgba(255, 42, 133, 0.45))
+    drop-shadow(0 20px 45px rgba(0, 0, 0, 0.98));
+  transition: transform 0.4s var(--ease-spring);
+}
+
+/* ==========================================================================
+   NEON PINK CIRCULAR HALO (PAGE 2 ONLY)
+   ========================================================================== */
+
+.portrait-halo {
+  position: absolute;
+  top: 33%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.35);
+  width: clamp(260px, 32vw, 440px);
+  height: clamp(260px, 32vw, 440px);
+  border-radius: 50%;
+  border: 3px solid var(--neon-pink);
+  box-shadow: 
+    0 0 15px var(--neon-pink),
+    0 0 35px rgba(255, 42, 133, 0.9),
+    0 0 75px rgba(255, 42, 133, 0.45),
+    inset 0 0 15px var(--neon-pink),
+    inset 0 0 30px rgba(255, 42, 133, 0.5);
+  background: radial-gradient(circle, rgba(255, 42, 133, 0.22) 0%, rgba(255, 42, 133, 0.05) 50%, transparent 75%);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: transform var(--transition-shared), opacity var(--transition-fade);
+}
+
+/* Halo blooms and glows intensely on Page 2 (fades back out automatically on Page 1 & 3) */
+.state-page-2 .portrait-halo {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  animation: halo-neon-pulse 4s ease-in-out infinite alternate 1.5s;
+}
+
+@keyframes halo-neon-pulse {
+  0% {
+    box-shadow: 
+      0 0 15px var(--neon-pink),
+      0 0 35px rgba(255, 42, 133, 0.9),
+      0 0 70px rgba(255, 42, 133, 0.4),
+      inset 0 0 15px var(--neon-pink),
+      inset 0 0 30px rgba(255, 42, 133, 0.45);
+    transform: translate(-50%, -50%) scale(0.98);
+  }
+  100% {
+    box-shadow: 
+      0 0 22px var(--neon-pink),
+      0 0 48px rgba(255, 42, 133, 1),
+      0 0 90px rgba(255, 42, 133, 0.6),
+      inset 0 0 20px var(--neon-pink),
+      inset 0 0 42px rgba(255, 42, 133, 0.6);
+    transform: translate(-50%, -50%) scale(1.03);
+  }
+}
+
+/* ==========================================================================
+   PAGE 2: LEFT INTRO & BIO CONTAINER (FORMS SMOOTHLY FROM PAGE 1)
+   ========================================================================== */
+
+.page2-intro-container {
+  position: absolute;
+  top: 50%;
+  left: clamp(2rem, 6.5vw, 7.5rem);
+  transform: translateY(-50%) translateX(-70px);
+  opacity: 0;
+  pointer-events: none;
+  max-width: min(580px, 46vw);
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-shared), opacity var(--transition-fade);
+}
+
+/* Coalesces smoothly on Page 2 (stays hidden on Page 1 & 3) */
+.state-page-2 .page2-intro-container {
+  transform: translateY(-50%) translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.intro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 42, 133, 0.1);
+  border: 1px solid rgba(255, 42, 133, 0.4);
+  color: var(--neon-pink);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.4rem 1.1rem;
+  border-radius: 9999px;
+  width: fit-content;
+  box-shadow: 0 0 15px rgba(255, 42, 133, 0.2);
+  margin-bottom: 1.2rem;
+}
+
+/* Two-line name lockup — sits directly above the bio, in the same left-aligned
+   column, standing in for the giant hero name once it dissolves away. */
+.intro-name-lockup {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.94;
+  margin-bottom: 0.9rem;
+}
+
+.intro-name-lockup .name-line {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--neon-pink);
+  font-size: clamp(2rem, 3.6vw, 3.4rem);
+  letter-spacing: 0.02em;
+}
+
+.intro-subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(1.1rem, 1.6vw, 1.55rem);
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.35;
+  margin-bottom: 1.1rem;
+}
+
+.intro-subtitle .highlight {
+  color: var(--neon-pink);
+  text-shadow: 0 0 10px rgba(255, 42, 133, 0.7);
+}
+
+.intro-bio {
+  font-family: var(--font-sans);
+  font-size: clamp(0.92rem, 1.05vw, 1.05rem);
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.7;
+  margin-bottom: 2.2rem;
+  max-width: 520px;
+}
+
+/* Page 2 Action Buttons */
+.intro-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2.2rem;
+  flex-wrap: wrap;
+}
+
+.btn-neon-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--neon-pink);
+  color: #080106;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 0.75rem 1.85rem;
+  border-radius: 9999px;
+  box-shadow: 0 0 22px rgba(255, 42, 133, 0.75);
+  transition: transform 0.25s var(--ease-spring), box-shadow 0.25s var(--ease-spring), background-color 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-neon-primary:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 35px rgba(255, 42, 133, 1), 0 5px 20px rgba(0, 0, 0, 0.5);
+  background: var(--neon-pink-hover);
+}
+
+.btn-neon-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(255, 42, 133, 0.06);
+  border: 1px solid rgba(255, 42, 133, 0.45);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  transition: all 0.25s var(--ease-spring);
+  white-space: nowrap;
+}
+
+.btn-neon-secondary:hover {
+  background: rgba(255, 42, 133, 0.18);
+  border-color: var(--neon-pink);
+  color: var(--neon-pink);
+  box-shadow: 0 0 20px rgba(255, 42, 133, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Page 2 Intro Social Links */
+.intro-socials {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.intro-social-link {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 42, 133, 0.05);
+  border: 1px solid rgba(255, 42, 133, 0.3);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1.05rem;
+  text-decoration: none;
+  transition: all 0.25s var(--ease-spring);
+}
+
+.intro-social-link:hover {
+  background: var(--neon-pink);
+  border-color: var(--neon-pink);
+  color: #080106;
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(255, 42, 133, 0.8);
+}
+
+/* ==========================================================================
+   PAGE 3: SERVICES GRID (FORMS SMOOTHLY OVER THE RECEDING PORTRAIT)
+   ========================================================================== */
+
+.page3-services-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(36px);
+  opacity: 0;
+  pointer-events: none;
+  width: min(760px, 88vw);
+  /* Hard height budget: never taller than the space between the header and
+     the bottom prompt button, so it can never bleed off the top or bottom
+     of the frame, regardless of viewport height. */
+  max-height: calc(100vh - 150px);
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.6rem, 1.8vh, 1.4rem);
+  transition: transform var(--transition-shared), opacity var(--transition-fade);
+}
+
+/* Coalesces smoothly on Page 3 (stays hidden on Page 1 & 2) */
+.state-page-3 .page3-services-container {
+  transform: translate(-50%, -50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.services-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.services-heading .intro-badge {
+  margin-bottom: clamp(0.4rem, 1vh, 0.8rem);
+}
+
+.services-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.services-title .highlight {
+  color: var(--neon-pink);
+  text-shadow: 0 0 14px rgba(255, 42, 133, 0.7);
+}
+
+.services-subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(0.8rem, 0.95vw, 0.92rem);
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+  max-width: 420px;
+  margin-top: 0.5rem;
+}
+
+/* 2x2 Grid of Rounded, Neon-Bordered Service Cards.
+   Row height is fixed via clamp() (viewport-relative, not aspect-ratio),
+   so total grid height is predictable and always fits the budget above. */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: clamp(130px, 24vh, 185px);
+  gap: clamp(0.7rem, 1.6vh, 1.2rem);
+  width: 100%;
+  flex-shrink: 1;
+  min-height: 0;
+}
+
+.service-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: clamp(0.3rem, 0.8vh, 0.55rem);
+  background: rgba(255, 42, 133, 0.05);
+  border: 1.5px solid rgba(255, 42, 133, 0.4);
+  border-radius: clamp(14px, 1.4vw, 22px);
+  padding: clamp(0.9rem, 1.8vh, 1.4rem);
+  overflow: hidden;
+  box-shadow: 0 0 22px rgba(255, 42, 133, 0.14), inset 0 0 24px rgba(255, 42, 133, 0.05);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: transform 0.35s var(--ease-spring), box-shadow 0.35s var(--ease-spring), border-color 0.35s var(--ease-spring), background-color 0.35s var(--ease-spring);
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--neon-pink);
+  background: rgba(255, 42, 133, 0.09);
+  box-shadow: 0 0 32px rgba(255, 42, 133, 0.4), inset 0 0 28px rgba(255, 42, 133, 0.08);
+}
+
+.service-icon {
+  width: clamp(34px, 3.2vw, 44px);
+  height: clamp(34px, 3.2vw, 44px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 42, 133, 0.12);
+  border: 1px solid rgba(255, 42, 133, 0.5);
+  color: var(--neon-pink);
+  font-size: clamp(0.95rem, 1.1vw, 1.15rem);
+  box-shadow: 0 0 16px rgba(255, 42, 133, 0.35);
+  transition: transform 0.35s var(--ease-spring), box-shadow 0.35s var(--ease-spring);
+  flex-shrink: 0;
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.08);
+  box-shadow: 0 0 24px rgba(255, 42, 133, 0.6);
+}
+
+.service-title {
+  font-family: var(--font-sans);
+  font-size: clamp(0.92rem, 1.1vw, 1.1rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.01em;
+}
+
+.service-desc {
+  font-family: var(--font-sans);
+  font-size: clamp(0.72rem, 0.82vw, 0.82rem);
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   PAGE 4: PROJECTS CAROUSEL (3 CARDS VISIBLE, ARROWS TO BROWSE MORE)
+   ========================================================================== */
+
+.page4-projects-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(36px);
+  opacity: 0;
+  pointer-events: none;
+  width: min(1000px, 92vw);
+  max-height: calc(100vh - 150px);
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.8rem, 2.2vh, 1.6rem);
+  transition: transform var(--transition-shared), opacity var(--transition-fade);
+}
+
+/* Coalesces smoothly on Page 4 (stays hidden on Page 1, 2 & 3) */
+.state-page-4 .page4-projects-container {
+  transform: translate(-50%, -50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.projects-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.projects-heading .intro-badge {
+  margin-bottom: clamp(0.4rem, 1vh, 0.8rem);
+}
+
+.projects-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.projects-title .highlight {
+  color: var(--neon-pink);
+  text-shadow: 0 0 14px rgba(255, 42, 133, 0.7);
+}
+
+.projects-subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(0.8rem, 0.95vw, 0.92rem);
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+  max-width: 460px;
+  margin-top: 0.5rem;
+}
+
+/* Carousel Row: Prev Arrow — Card Viewport — Next Arrow */
+.projects-carousel {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.7rem, 1.6vw, 1.4rem);
+  width: 100%;
+}
+
+.carousel-arrow {
+  flex-shrink: 0;
+  width: clamp(40px, 3.4vw, 52px);
+  height: clamp(40px, 3.4vw, 52px);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 42, 133, 0.08);
+  border: 1.5px solid rgba(255, 42, 133, 0.5);
+  color: var(--neon-pink);
+  font-size: clamp(0.9rem, 1.1vw, 1.1rem);
+  cursor: pointer;
+  box-shadow: 0 0 16px rgba(255, 42, 133, 0.3);
+  transition: all 0.3s var(--ease-spring);
+}
+
+.carousel-arrow:hover {
+  background: var(--neon-pink);
+  color: #080106;
+  box-shadow: 0 0 26px rgba(255, 42, 133, 0.75);
+  transform: scale(1.06);
+}
+
+.carousel-arrow:active {
+  transform: scale(0.94);
+}
+
+/* Clips the sliding track; scrolling is driven by the arrow buttons in JS,
+   but native touch/trackpad swiping works here too since it's a real
+   horizontally-scrolling element with scroll-snap. */
+.projects-viewport {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.projects-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.projects-track {
+  --projects-gap: 0px;
+  --projects-visible: 3;
+  display: flex;
+  align-items: center;
+  gap: var(--projects-gap);
+}
+
+.project-card {
+  position: relative;
+  scroll-snap-align: start;
+  flex: 0 0 calc((100% - (var(--projects-visible) - 1) * var(--projects-gap)) / var(--projects-visible));
+  aspect-ratio: 1 / 1;
+  max-height: clamp(190px, 30vh, 250px);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(0.5rem, 1vh, 0.8rem);
+  background: rgba(255, 42, 133, 0.05);
+  border: 1.5px solid rgba(255, 42, 133, 0.4);
+  border-radius: clamp(20px, 2.2vw, 32px);
+  padding: clamp(1rem, 1.8vh, 1.5rem);
+  box-shadow: 0 0 22px rgba(255, 42, 133, 0.14), inset 0 0 24px rgba(255, 42, 133, 0.05);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: transform 0.35s var(--ease-spring), box-shadow 0.35s var(--ease-spring), border-color 0.35s var(--ease-spring), background-color 0.35s var(--ease-spring);
+}
+
+/* Whichever card is currently centered in the viewport is always the
+   "front" card — scaled up and layered above its neighbors. Which card
+   this is changes continuously as you scroll (see the JS that toggles
+   this class), rather than being fixed to a static position. */
+.project-card.is-middle {
+  transform: scale(1.08);
+  z-index: 3;
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 30px rgba(255, 42, 133, 0.45), inset 0 0 26px rgba(255, 42, 133, 0.1);
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--neon-pink);
+  background: rgba(255, 42, 133, 0.09);
+  box-shadow: 0 0 32px rgba(255, 42, 133, 0.4), inset 0 0 28px rgba(255, 42, 133, 0.08);
+}
+
+.project-card.is-middle:hover {
+  transform: scale(1.08) translateY(-6px);
+}
+
+.project-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-index {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(255, 42, 133, 0.6);
+}
+
+.project-github-link {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 42, 133, 0.1);
+  border: 1px solid rgba(255, 42, 133, 0.4);
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  transition: all 0.25s var(--ease-spring);
+}
+
+.project-github-link:hover {
+  background: var(--neon-pink);
+  border-color: var(--neon-pink);
+  color: #080106;
+  box-shadow: 0 0 16px rgba(255, 42, 133, 0.7);
+  transform: translateY(-2px);
+}
+
+.project-title {
+  font-family: var(--font-sans);
+  font-size: clamp(0.98rem, 1.15vw, 1.15rem);
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.project-desc {
+  font-family: var(--font-sans);
+  font-size: clamp(0.76rem, 0.86vw, 0.86rem);
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   INTERACTIVE PAGE TRANSITION PROMPT INDICATOR
+   ========================================================================== */
+
+.page-transition-prompt {
+  position: absolute;
+  bottom: clamp(1.4rem, 2.8vh, 2.2rem);
+  right: clamp(1.5rem, 3.5vw, 3.5rem);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(14, 2, 10, 0.65);
+  border: 1px solid rgba(255, 42, 133, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 9999px;
+  padding: 0.55rem 1.25rem;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.78);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(255, 42, 133, 0.08);
+  transition: all 0.3s var(--ease-spring);
+}
+
+.page-transition-prompt:hover {
+  border-color: var(--neon-pink);
+  color: #ffffff;
+  box-shadow: 0 0 25px rgba(255, 42, 133, 0.5);
+  transform: translateY(-2px);
+}
+
+.prompt-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--neon-pink);
+  transition: transform 0.4s var(--ease-spring);
+}
+
+.state-page-2 .prompt-arrow,
+.state-page-3 .prompt-arrow,
+.state-page-4 .prompt-arrow {
+  transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   ========================================================================== */
+
+@media (max-width: 1200px) {
+  .state-page-2 .hero-photo-wrapper {
+    transform: translateX(calc(-50% + 20vw));
+  }
+
+  .state-page-3 .hero-photo-wrapper,
+  .state-page-4 .hero-photo-wrapper {
+    transform: translateX(calc(-50% + 40vw)) scale(0.55);
+  }
+
+  .page2-intro-container {
+    max-width: 48vw;
+  }
+
+  .page3-services-container {
+    width: min(680px, 90vw);
+  }
+
+  .page4-projects-container {
+    width: min(720px, 90vw);
+  }
+}
+
+@media (max-width: 1024px) {
+  .side-text {
+    display: none;
+  }
+
+  .state-page-2 .hero-photo-wrapper {
+    transform: translateX(calc(-50% + 18vw));
+  }
+
+  .state-page-3 .hero-photo-wrapper,
+  .state-page-4 .hero-photo-wrapper {
+    transform: translateX(calc(-50% + 30vw)) scale(0.4);
+    opacity: 0;
+  }
+
+  .page2-intro-container {
+    max-width: 52vw;
+    left: 2.5rem;
+  }
+
+  .page4-projects-container {
+    width: min(600px, 92vw);
+  }
+
+  .projects-track {
+    --projects-visible: 2;
+  }
+
+  .page3-services-container {
+    width: min(560px, 92vw);
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 0;
+  }
+
+  .screen-frame {
+    border-radius: 0;
+    border: none;
+  }
+
+  .corner-star.top-left,
+  .corner-star.top-right {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 65px;
+    right: 0;
+    width: 220px;
+    background: rgba(18, 4, 14, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid rgba(255, 42, 133, 0.25);
+    border-bottom: 1px solid rgba(255, 42, 133, 0.25);
+    border-radius: 0 0 0 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.6rem 2rem;
+    gap: 1.4rem;
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.35s var(--ease-spring), opacity 0.35s var(--ease-spring);
+    box-shadow: -10px 20px 40px rgba(0, 0, 0, 0.7);
+  }
+
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  .hero-photo-wrapper {
+    height: 76vh;
+  }
+
+  /* Mobile Portrait on Page 2 shifts slightly right and down to frame content */
+  .state-page-2 .hero-photo-wrapper {
+    transform: translateX(calc(-50% + 18vw)) scale(0.85);
+    opacity: 0.65;
+  }
+
+  /* Mobile Portrait on Page 3 & 4 exits completely so the content can breathe */
+  .state-page-3 .hero-photo-wrapper,
+  .state-page-4 .hero-photo-wrapper {
+    transform: translateX(-50%) scale(0.3) translateY(10%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .page2-intro-container {
+    max-width: 90vw;
+    left: 1.5rem;
+  }
+
+  .page3-services-container {
+    width: 92vw;
+    max-height: calc(100vh - 120px);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: clamp(110px, 20vh, 150px);
+    gap: 0.6rem;
+  }
+
+  .service-card {
+    padding: 0.8rem;
+    gap: 0.35rem;
+    border-radius: 16px;
+  }
+
+  .service-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+
+  .service-title {
+    font-size: 0.82rem;
+  }
+
+  .service-desc {
+    font-size: 0.66rem;
+    line-height: 1.35;
+    -webkit-line-clamp: 2;
+  }
+
+  .page4-projects-container {
+    width: 92vw;
+    max-height: calc(100vh - 120px);
+  }
+
+  .projects-track {
+    --projects-visible: 1;
+  }
+
+   .project-card {
+    aspect-ratio: auto;
+    max-height: none;
+    min-height: clamp(150px, 26vh, 200px);
+    padding: 0.9rem;
+    border-radius: 20px;
+  }
+
+  .project-title {
+    font-size: 0.9rem;
+  }
+
+  .project-desc {
+    font-size: 0.74rem;
+    -webkit-line-clamp: 3;
+  }
+
+  .carousel-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 0.85rem;
+  }
+
+  .projects-subtitle {
+    display: none;
+  }
+
+  .services-subtitle {
+    display: none;
+  }
+
+  .hero-bg-text-wrapper {
+    top: 47%;
+    gap: 0.6vh;
+  }
+
+  .social-pills-bar {
+    bottom: 1.2rem;
+    gap: 0.95rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+  }
+
+  .social-pill {
+    padding: 0.48rem 1.15rem;
+    font-size: 0.76rem;
+  }
+
+  .page-transition-prompt {
+    bottom: 1rem;
+    right: 1.2rem;
+    padding: 0.45rem 0.95rem;
+    font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-photo-wrapper {
+    height: 70vh;
+  }
+
+  .name-row {
+    font-size: clamp(2.3rem, 10.5vw, 3.4rem);
+    letter-spacing: 0.01em;
+  }
+
+  .intro-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-neon-primary,
+  .btn-neon-secondary {
+    justify-content: center;
+  }
+
+  .page3-services-container {
+    max-height: calc(100vh - 100px);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: clamp(70px, 13vh, 92px);
+    gap: 0.5rem;
+  }
+
+  .service-card {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.6rem 0.9rem;
+  }
+
+  .service-title {
+    font-size: 0.85rem;
+  }
+
+  .service-desc {
+    -webkit-line-clamp: 2;
+  }
+}
+
+/* ==========================================================================
+   PAGE 5: SKILLS & FOOTER CONTAINER (SEMANTIC REQUIREMENTS)
+   ========================================================================== */
+
+.page5-skills-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(36px);
+  opacity: 0;
+  pointer-events: none;
+  width: min(880px, 90vw);
+  max-height: calc(100vh - 140px);
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.5rem, 1.5vh, 1.2rem);
+  transition: transform var(--transition-shared), opacity var(--transition-fade);
+}
+
+/* Coalesces smoothly on Page 5 */
+.state-page-5 .page5-skills-container {
+  transform: translate(-50%, -50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.skills-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.skills-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.skills-subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(0.78rem, 0.95vw, 0.95rem);
+  color: rgba(255, 255, 255, 0.68);
+  margin-top: 0.3rem;
+  max-width: 520px;
+}
+
+.skills-content-box {
+  width: 100%;
+}
+
+.skills-bullet-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.6rem, 1.4vh, 1rem);
+  padding: 0;
+  margin: 0;
+}
+
+.skill-bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  background: rgba(18, 4, 14, 0.75);
+  border: 1px solid rgba(255, 42, 133, 0.25);
+  border-radius: 16px;
+  padding: clamp(0.65rem, 1.3vh, 0.95rem) clamp(0.85rem, 1.4vw, 1.2rem);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.3s var(--ease-spring), border-color 0.3s var(--ease-spring), box-shadow 0.3s var(--ease-spring);
+}
+
+.skill-bullet-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 24px rgba(255, 42, 133, 0.35);
+}
+
+.skill-bullet-item .skill-icon {
+  font-size: 1.4rem;
+  color: var(--neon-pink);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.skill-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.skill-name {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.skill-detail {
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.35;
+}
+
+/* Site Footer */
+.site-footer {
+  width: 100%;
+  margin-top: clamp(0.4rem, 1vh, 0.8rem);
+  padding-top: clamp(0.4rem, 1vh, 0.8rem);
+  border-top: 1px solid rgba(255, 42, 133, 0.2);
+  display: flex;
+  justify-content: center;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 42, 133, 0.08);
+  border: 1px solid rgba(255, 42, 133, 0.35);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.4rem 1.1rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.25s var(--ease-spring);
+}
+
+.footer-link-btn:hover {
+  background: var(--neon-pink);
+  color: #080106;
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 20px rgba(255, 42, 133, 0.6);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .skills-bullet-list {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .skill-bullet-item {
+    padding: 0.55rem 0.8rem;
+  }
+
+  .skill-detail {
+    display: none;
+  }
+}

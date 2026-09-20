@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EJ Kate Alcover — Personal Profile & Portfolio</title>
+  
+  <!-- Google Fonts: Bodoni Moda, Outfit, Syne -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,700;0,6..96,800;0,6..96,900;1,6..96,800&family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- External CSS3 Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Screen Frame Stage Container -->
+  <div class="screen-frame state-page-1" id="screenFrame">
+
+    <!-- Header / Navbar Element -->
+    <header class="header">
+      <nav class="navbar">
+        <a href="#home" class="logo" id="logoLink">
+          EJ KATE<span class="logo-dot">.</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="nav-link active" data-page="1">Home</a></li>
+          <li><a href="#about" class="nav-link" data-page="2">About</a></li>
+          <li><a href="#service" class="nav-link" data-page="3">Service</a></li>
+          <li><a href="#projects" class="nav-link" data-page="4">Projects</a></li>
+          <li><a href="#skill" class="nav-link" data-page="5">Skill</a></li>
+          <li><a href="#contact" class="nav-link" data-page="5">Contact</a></li>
+        </ul>
+        <button class="mobile-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Corner Star Ornaments -->
+    <div class="corner-star top-left" aria-hidden="true">✦</div>
+    <div class="corner-star top-right" aria-hidden="true">✦</div>
+    <div class="corner-star bottom-left" aria-hidden="true">✦</div>
+    <div class="corner-star bottom-right" aria-hidden="true">✦</div>
+
+    <!-- Side Vertical Text -->
+    <div class="side-text side-left" aria-hidden="true">PORTFOLIO // EJ KATE</div>
+    <div class="side-text side-right" aria-hidden="true">WEB DEVELOPER // 2026</div>
+
+    <!-- Main Container Element -->
+    <main class="hero-canvas">
+
+      <div class="bg-waves" aria-hidden="true">
+        <div class="wave wave-1"></div>
+        <div class="wave wave-2"></div>
+      </div>
+      <div class="ambient-glow center-magenta-glow"></div>
+
+      <!-- Section 1: Header / Hero Section -->
+      <section id="home" class="hero-section">
+        <div class="hero-name-stage" id="heroNameStage">
+          <div class="row1-anchor" id="row1Anchor" aria-hidden="true">EJ KATE ALCOVER</div>
+          <h1 class="shared-name-row" id="sharedName">EJ KATE ALCOVER</h1>
+          <div class="secondary-name-rows" id="secondaryRows" aria-hidden="true">
+            <div class="name-row row-2">EJ KATE ALCOVER</div>
+            <div class="name-row row-3">EJ KATE ALCOVER</div>
+            <div class="name-row row-4">EJ KATE ALCOVER</div>
+          </div>
+        </div>
+
+        <div class="hero-photo-wrapper" id="heroPhotoWrapper">
+          <div class="portrait-halo" id="portraitHalo" aria-hidden="true"></div>
+          <img src="portrait-normal.png" alt="EJ Kate Alcover" class="hero-photo" id="heroPhoto">
+        </div>
+      </section>
+
+      <!-- Section 2: About Me Section -->
+      <section id="about" class="about-section page2-intro-container" id="page2Intro">
+        <div class="intro-badge">
+          <span class="badge-dot">✦</span> Welcome
+        </div>
+
+        <div class="intro-name-lockup" aria-hidden="true">
+          <span class="name-line">EJ KATE</span>
+          <span class="name-line">ALCOVER</span>
+        </div>
+
+        <h2 class="intro-subtitle">Hi, I'm <span class="highlight">Kate</span> — Web Developer</h2>
+        <p class="intro-bio">
+          I build modern, responsive, and user-friendly web applications, turning ideas into clean, functional, and cinematic digital experiences.
+        </p>
+        <div class="intro-actions">
+          <a href="#contact" class="btn-neon-primary" data-page="5">
+            <span>Get In Touch</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <a href="#" class="btn-neon-secondary">
+            <i class="fa-solid fa-file-arrow-down"></i>
+            <span>Download CV</span>
+          </a>
+        </div>
+        <div class="intro-socials">
+          <a href="https://github.com/ejkatealcover" target="_blank" rel="noreferrer" aria-label="GitHub" class="intro-social-link">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn" class="intro-social-link">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" class="intro-social-link">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="mailto:ejkatealcover.137@gmail.com" aria-label="Email" class="intro-social-link">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- Section 3: Services Section -->
+      <section id="service" class="services-section page3-services-container" id="page3Services">
+        <div class="services-heading">
+          <div class="intro-badge">
+            <span class="badge-dot">✦</span> What I Do
+          </div>
+          <h2 class="services-title">My <span class="highlight">Services</span></h2>
+          <p class="services-subtitle">
+            A focused set of technical skills I bring to every web application project.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+            <h3 class="service-title">Web Design</h3>
+            <p class="service-desc">Crafting responsive, visually engaging layouts that reflect your brand and guide visitors with clarity.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-compass-drafting"></i></div>
+            <h3 class="service-title">UI/UX Designer</h3>
+            <p class="service-desc">Designing intuitive interfaces and smooth user flows where usability and aesthetics work together.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-code"></i></div>
+            <h3 class="service-title">Frontend</h3>
+            <p class="service-desc">Building fast, interactive interfaces with clean, maintainable code across every screen size.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-server"></i></div>
+            <h3 class="service-title">Backend</h3>
+            <p class="service-desc">Developing secure, scalable server-side systems and APIs that keep products running reliably.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Projects Section -->
+      <section id="projects" class="projects-section page4-projects-container" id="page4Projects">
+        <div class="projects-heading">
+          <div class="intro-badge">
+            <span class="badge-dot">✦</span> Projects
+          </div>
+          <h2 class="projects-title">Featured <span class="highlight">Projects</span></h2>
+          <p class="projects-subtitle">
+            A selection of projects demonstrating frontend web development and UI implementation.
+          </p>
+        </div>
+
+        <div class="projects-carousel">
+          <button class="carousel-arrow carousel-prev" id="projectsPrev" aria-label="Previous projects">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+
+          <div class="projects-viewport" id="projectsViewport">
+            <div class="projects-track" id="projectsTrack">
+              <div class="project-card">
+                <div class="project-card-top">
+                  <span class="project-index">01</span>
+                  <a href="https://github.com/ejkatealcover" class="project-github-link" target="_blank" rel="noreferrer" aria-label="View repository on GitHub">
+                    <i class="fa-brands fa-github"></i>
+                  </a>
+                </div>
+                <h3 class="project-title">Personal Profile Webpage</h3>
+                <p class="project-desc">A modern single-page profile built with semantic HTML5, CSS3, and JavaScript.</p>
+              </div>
+
+              <div class="project-card">
+                <div class="project-card-top">
+                  <span class="project-index">02</span>
+                  <a href="https://github.com/ejkatealcover" class="project-github-link" target="_blank" rel="noreferrer" aria-label="View repository on GitHub">
+                    <i class="fa-brands fa-github"></i>
+                  </a>
+                </div>
+                <h3 class="project-title">E-Commerce Web App</h3>
+                <p class="project-desc">A full-stack online store interface with interactive product gallery and cart.</p>
+              </div>
+
+              <div class="project-card">
+                <div class="project-card-top">
+                  <span class="project-index">03</span>
+                  <a href="https://github.com/ejkatealcover" class="project-github-link" target="_blank" rel="noreferrer" aria-label="View repository on GitHub">
+                    <i class="fa-brands fa-github"></i>
+                  </a>
+                </div>
+                <h3 class="project-title">Portfolio Builder</h3>
+                <p class="project-desc">A tool for creating personal portfolio sites with customizable layouts.</p>
+              </div>
+
+              <div class="project-card">
+                <div class="project-card-top">
+                  <span class="project-index">04</span>
+                  <a href="https://github.com/ejkatealcover" class="project-github-link" target="_blank" rel="noreferrer" aria-label="View repository on GitHub">
+                    <i class="fa-brands fa-github"></i>
+                  </a>
+                </div>
+                <h3 class="project-title">Task Manager App</h3>
+                <p class="project-desc">A collaborative task tracking web app with drag-and-drop workflow status.</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="carousel-arrow carousel-next" id="projectsNext" aria-label="Next projects">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- Section 5: Skills / Interests Section (Bulleted List Requirement) -->
+      <section id="skill" class="skills-section page5-skills-container" id="page5Skills">
+        <div class="skills-heading">
+          <div class="intro-badge">
+            <span class="badge-dot">✦</span> Technical & Personal Skills
+          </div>
+          <h2 class="skills-title">Skills & <span class="highlight">Interests</span></h2>
+          <p class="skills-subtitle">
+            Core technical competencies and tools used to build modern, responsive web applications.
+          </p>
+        </div>
+
+        <div class="skills-content-box">
+          <ul class="skills-bullet-list">
+            <li class="skill-bullet-item">
+              <i class="fa-brands fa-html5 skill-icon"></i>
+              <div class="skill-info">
+                <h4 class="skill-name">HTML5 Semantic Structure</h4>
+                <p class="skill-detail">Expertise in using semantic elements (&lt;header&gt;, &lt;main&gt;, &lt;section&gt;, &lt;footer&gt;) for accessible, structured web documents.</p>
+              </div>
+            </li>
+            <li class="skill-bullet-item">
+              <i class="fa-brands fa-css3-alt skill-icon"></i>
+              <div class="skill-info">
+                <h4 class="skill-name">CSS3 Styling & Box-Model</h4>
+                <p class="skill-detail">Proficiency in external stylesheet architecture, Flexbox, Grid, custom properties, animations, and responsive media queries.</p>
+              </div>
+            </li>
+            <li class="skill-bullet-item">
+              <i class="fa-brands fa-js skill-icon"></i>
+              <div class="skill-info">
+                <h4 class="skill-name">JavaScript & DOM Control</h4>
+                <p class="skill-detail">Hands-on experience with ES6+, interactive DOM manipulation, event handling, and single-page navigation transitions.</p>
+              </div>
+            </li>
+            <li class="skill-bullet-item">
+              <i class="fa-brands fa-git-alt skill-icon"></i>
+              <div class="skill-info">
+                <h4 class="skill-name">Git & GitHub Deployment</h4>
+                <p class="skill-detail">Version control workflow using Git bash commands (git init, add, commit, push) and deploying live sites via GitHub Pages.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Footer Element: Contact Links pointing to GitHub, LinkedIn, or Email -->
+        <footer id="contact" class="site-footer">
+          <div class="footer-links">
+            <a href="https://github.com/ejkatealcover" target="_blank" rel="noreferrer" class="footer-link-btn">
+              <i class="fa-brands fa-github"></i>
+              <span>GitHub Repository</span>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="footer-link-btn">
+              <i class="fa-brands fa-linkedin-in"></i>
+              <span>LinkedIn Profile</span>
+            </a>
+            <a href="mailto:ejkatealcover.137@gmail.com" class="footer-link-btn">
+              <i class="fa-solid fa-envelope"></i>
+              <span>Email Contact</span>
+            </a>
+          </div>
+        </footer>
+      </section>
+
+      <!-- Bottom Floating Social Pills Bar -->
+      <div class="social-pills-bar" id="socialPillsBar">
+        <a href="https://github.com/ejkatealcover" target="_blank" rel="noreferrer" class="social-pill">
+          <i class="fa-brands fa-github"></i>
+          <span>GITHUB</span>
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="social-pill">
+          <i class="fa-brands fa-linkedin-in"></i>
+          <span>LINKEDIN</span>
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noreferrer" class="social-pill">
+          <i class="fa-brands fa-instagram"></i>
+          <span>INSTAGRAM</span>
+        </a>
+        <a href="mailto:ejkatealcover.137@gmail.com" class="social-pill">
+          <i class="fa-brands fa-discord"></i>
+          <span>DISCORD</span>
+        </a>
+      </div>
+
+      <!-- Page Transition Prompt Button -->
+      <button class="page-transition-prompt" id="pagePrompt" aria-label="Navigate between pages">
+        <span class="prompt-text" id="promptText">Scroll to explore</span>
+        <div class="prompt-arrow">
+          <i class="fa-solid fa-chevron-down" id="promptIcon"></i>
+        </div>
+      </button>
+
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
