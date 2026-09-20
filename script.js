@@ -200,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 9. Projects Carousel Controller (Index-based Cover Flow Center Focus)
   if (projectsTrack && projectsViewport && projectsPrev && projectsNext) {
     const cards = Array.from(projectsTrack.querySelectorAll('.project-card'));
+    const indicators = Array.from(document.querySelectorAll('.indicator-dot'));
     let activeCardIndex = 0;
 
     const centerCard = (index) => {
@@ -220,6 +221,9 @@ document.addEventListener('DOMContentLoaded', () => {
       cards.forEach((card, i) => {
         card.classList.toggle('is-middle', i === activeCardIndex);
       });
+      indicators.forEach((dot, i) => {
+        dot.classList.toggle('active', i === activeCardIndex);
+      });
     };
 
     projectsPrev.addEventListener('click', (e) => {
@@ -230,6 +234,13 @@ document.addEventListener('DOMContentLoaded', () => {
     projectsNext.addEventListener('click', (e) => {
       e.preventDefault();
       centerCard(activeCardIndex + 1);
+    });
+
+    // Indicator dot clicks
+    indicators.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        centerCard(index);
+      });
     });
 
     // Clicking any card directly centers and activates it
@@ -264,6 +275,9 @@ document.addEventListener('DOMContentLoaded', () => {
         activeCardIndex = closestIndex;
         cards.forEach((card, i) => {
           card.classList.toggle('is-middle', i === activeCardIndex);
+        });
+        indicators.forEach((dot, i) => {
+          dot.classList.toggle('active', i === activeCardIndex);
         });
       }
     };
