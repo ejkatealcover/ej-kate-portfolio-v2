@@ -2111,6 +2111,19 @@ body {
   box-shadow: 0 0 16px rgba(255, 42, 133, 0.35);
 }
 
+/* Prevent Browser Autofill from Overriding Dark Theme Background to White */
+.form-input:-webkit-autofill,
+.form-input:-webkit-autofill:hover,
+.form-input:-webkit-autofill:focus,
+.form-textarea:-webkit-autofill,
+.form-textarea:-webkit-autofill:hover,
+.form-textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff !important;
+  -webkit-box-shadow: 0 0 0px 1000px #12040e inset !important;
+  border-color: var(--neon-pink) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 .form-textarea {
   resize: none;
 }
