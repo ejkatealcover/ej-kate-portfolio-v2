@@ -404,24 +404,27 @@
 
           <!-- Right Column: Interactive Glassmorphic Contact Form -->
           <div class="contact-form-col">
-            <form class="contact-form" id="contactForm" onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent.');">
+            <form action="https://api.web3forms.com/submit" method="POST" class="contact-form" id="contactForm">
+              <input type="hidden" name="access_key" value="18d44a0a-d6dd-4e5e-9931-bade9be0317e">
+              <input type="hidden" name="from_name" value="EJ Kate Portfolio Contact Form">
+              
               <div class="form-row-two">
                 <div class="form-group">
                   <label for="formName" class="form-label">Your Name</label>
-                  <input type="text" id="formName" class="form-input" placeholder="e.g. Alex Morgan" required>
+                  <input type="text" id="formName" name="name" class="form-input" placeholder="e.g. Alex Morgan" required>
                 </div>
                 <div class="form-group">
                   <label for="formEmail" class="form-label">Your Email</label>
-                  <input type="email" id="formEmail" class="form-input" placeholder="e.g. alex@example.com" required>
+                  <input type="email" id="formEmail" name="email" class="form-input" placeholder="e.g. alex@example.com" required>
                 </div>
               </div>
               <div class="form-group">
                 <label for="formSubject" class="form-label">Subject</label>
-                <input type="text" id="formSubject" class="form-input" placeholder="Project Inquiry / Collaboration" required>
+                <input type="text" id="formSubject" name="subject" class="form-input" placeholder="Project Inquiry / Collaboration" required>
               </div>
               <div class="form-group">
                 <label for="formMessage" class="form-label">Message</label>
-                <textarea id="formMessage" class="form-textarea" rows="4" placeholder="Tell me about your project or inquiry..." required></textarea>
+                <textarea id="formMessage" name="message" class="form-textarea" rows="4" placeholder="Tell me about your project or inquiry..." required></textarea>
               </div>
               <button type="submit" class="btn-neon-primary btn-submit-form">
                 <span>Send Message</span>
