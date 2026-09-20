@@ -10,8 +10,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,700;0,6..96,800;0,6..96,900;1,6..96,800&family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   
-  <!-- Font Awesome Icons -->
+  <!-- Font Awesome & Devicon Logos -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
   
   <!-- External CSS3 Stylesheet -->
   <link rel="stylesheet" href="style.css">
@@ -133,24 +134,39 @@
 
         <div class="services-grid">
           <div class="service-card">
-            <div class="service-icon"><i class="fa-solid fa-pen-ruler"></i></div>
-            <h3 class="service-title">Web Design</h3>
-            <p class="service-desc">Crafting responsive, visually engaging layouts that reflect your brand and guide visitors with clarity.</p>
+            <div class="service-icon"><i class="fa-solid fa-microchip"></i></div>
+            <h3 class="service-title">Embedded Systems Design</h3>
+            <p class="service-desc">Microcontrollers, hardware interfaces, and IoT devices.</p>
           </div>
           <div class="service-card">
-            <div class="service-icon"><i class="fa-solid fa-compass-drafting"></i></div>
-            <h3 class="service-title">UI/UX Designer</h3>
-            <p class="service-desc">Designing intuitive interfaces and smooth user flows where usability and aesthetics work together.</p>
+            <div class="service-icon"><i class="fa-solid fa-desktop"></i></div>
+            <h3 class="service-title">Desktop App Development</h3>
+            <p class="service-desc">Native and cross-platform desktop applications.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-diagram-project"></i></div>
+            <h3 class="service-title">Circuit Design & PCB</h3>
+            <p class="service-desc">Hardware schematics, prototyping, and PCB layout development.</p>
           </div>
           <div class="service-card">
             <div class="service-icon"><i class="fa-solid fa-code"></i></div>
-            <h3 class="service-title">Frontend</h3>
-            <p class="service-desc">Building fast, interactive interfaces with clean, maintainable code across every screen size.</p>
+            <h3 class="service-title">Software Development</h3>
+            <p class="service-desc">Scalable web apps, system tools, and embedded firmware.</p>
           </div>
           <div class="service-card">
-            <div class="service-icon"><i class="fa-solid fa-server"></i></div>
-            <h3 class="service-title">Backend</h3>
-            <p class="service-desc">Developing secure, scalable server-side systems and APIs that keep products running reliably.</p>
+            <div class="service-icon"><i class="fa-solid fa-terminal"></i></div>
+            <h3 class="service-title">Systems Programming</h3>
+            <p class="service-desc">High-performance low-level system code and algorithms.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-bug-slash"></i></div>
+            <h3 class="service-title">Testing & Debugging</h3>
+            <p class="service-desc">Quality assurance, systematic testing, and bug resolution.</p>
+          </div>
+          <div class="service-card full-width-service">
+            <div class="service-icon"><i class="fa-solid fa-flask"></i></div>
+            <h3 class="service-title">Research & Development</h3>
+            <p class="service-desc">Technology exploration, prototyping, and innovative engineering solutions.</p>
           </div>
         </div>
       </section>
@@ -302,33 +318,77 @@
         </div>
 
         <div class="skills-content-box">
-          <ul class="skills-bullet-list">
+          <ul class="skills-bullet-list language-skills-grid">
             <li class="skill-bullet-item">
-              <i class="fa-brands fa-html5 skill-icon"></i>
+              <div class="skill-icon-wrapper">
+                <i class="devicon-c-plain colored skill-devicon"></i>
+              </div>
               <div class="skill-info">
-                <h4 class="skill-name">HTML5 Semantic Structure</h4>
-                <p class="skill-detail">Expertise in using semantic elements (&lt;header&gt;, &lt;main&gt;, &lt;section&gt;, &lt;footer&gt;) for accessible, structured web documents.</p>
+                <h4 class="skill-name">C</h4>
+                <p class="skill-detail">Low-level systems & embedded programming</p>
               </div>
             </li>
             <li class="skill-bullet-item">
-              <i class="fa-brands fa-css3-alt skill-icon"></i>
+              <div class="skill-icon-wrapper">
+                <i class="devicon-cplusplus-plain colored skill-devicon"></i>
+              </div>
               <div class="skill-info">
-                <h4 class="skill-name">CSS3 Styling & Box-Model</h4>
-                <p class="skill-detail">Proficiency in external stylesheet architecture, Flexbox, Grid, custom properties, animations, and responsive media queries.</p>
+                <h4 class="skill-name">C++</h4>
+                <p class="skill-detail">Object-oriented software & high performance</p>
               </div>
             </li>
             <li class="skill-bullet-item">
-              <i class="fa-brands fa-js skill-icon"></i>
+              <div class="skill-icon-wrapper">
+                <i class="devicon-javascript-plain colored skill-devicon"></i>
+              </div>
               <div class="skill-info">
-                <h4 class="skill-name">JavaScript & DOM Control</h4>
-                <p class="skill-detail">Hands-on experience with ES6+, interactive DOM manipulation, event handling, and single-page navigation transitions.</p>
+                <h4 class="skill-name">JavaScript</h4>
+                <p class="skill-detail">Interactive web logic & ES6+ development</p>
               </div>
             </li>
             <li class="skill-bullet-item">
-              <i class="fa-brands fa-git-alt skill-icon"></i>
+              <div class="skill-icon-wrapper">
+                <i class="devicon-python-plain colored skill-devicon"></i>
+              </div>
               <div class="skill-info">
-                <h4 class="skill-name">Git & GitHub Deployment</h4>
-                <p class="skill-detail">Version control workflow using Git bash commands (git init, add, commit, push) and deploying live sites via GitHub Pages.</p>
+                <h4 class="skill-name">Python</h4>
+                <p class="skill-detail">Scripting, algorithms & backend automation</p>
+              </div>
+            </li>
+            <li class="skill-bullet-item">
+              <div class="skill-icon-wrapper">
+                <i class="devicon-csharp-plain colored skill-devicon"></i>
+              </div>
+              <div class="skill-info">
+                <h4 class="skill-name">C#</h4>
+                <p class="skill-detail">Desktop applications & .NET framework</p>
+              </div>
+            </li>
+            <li class="skill-bullet-item">
+              <div class="skill-icon-wrapper">
+                <i class="devicon-html5-plain colored skill-devicon"></i>
+              </div>
+              <div class="skill-info">
+                <h4 class="skill-name">HTML</h4>
+                <p class="skill-detail">Semantic HTML5 structure & accessibility</p>
+              </div>
+            </li>
+            <li class="skill-bullet-item">
+              <div class="skill-icon-wrapper">
+                <i class="devicon-css3-plain colored skill-devicon"></i>
+              </div>
+              <div class="skill-info">
+                <h4 class="skill-name">CSS</h4>
+                <p class="skill-detail">CSS3 box-model, animations & responsive styling</p>
+              </div>
+            </li>
+            <li class="skill-bullet-item">
+              <div class="skill-icon-wrapper">
+                <i class="fa-solid fa-database skill-icon"></i>
+              </div>
+              <div class="skill-info">
+                <h4 class="skill-name">SQL</h4>
+                <p class="skill-detail">Relational database queries & data management</p>
               </div>
             </li>
           </ul>
