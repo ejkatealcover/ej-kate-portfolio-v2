@@ -197,93 +197,90 @@ document.addEventListener('DOMContentLoaded', () => {
   //    Note: .projects-viewport is the actual scrolling element
   //    (overflow-x: auto); .projects-track is just the flex row of cards
   //    inside it and has no scroll of its own.
+  // 9. Projects Carousel Controller (Index-based Cover Flow Center Focus)
   if (projectsTrack && projectsViewport && projectsPrev && projectsNext) {
-    const getCardStep = () => {
-      const firstCard = projectsTrack.querySelector('.project-card');
-      if (!firstCard) return 0;
-      const trackStyle = window.getComputedStyle(projectsTrack);
-      const gap = parseFloat(trackStyle.columnGap || trackStyle.gap || '0') || 0;
-      return firstCard.getBoundingClientRect().width + gap;
+    const cards = Array.from(projectsTrack.querySelectorAll('.project-card'));
+    let activeCardIndex = 0;
+
+    const centerCard = (index) => {
+      if (!cards.length) return;
+      activeCardIndex = (index + cards.length) % cards.length;
+
+      const targetCard = cards[activeCardIndex];
+      const cardLeft = targetCard.offsetLeft;
+      const cardWidth = targetCard.offsetWidth;
+      const viewportWidth = projectsViewport.clientWidth;
+      const targetScrollLeft = cardLeft - (viewportWidth / 2) + (cardWidth / 2);
+
+      projectsViewport.scrollTo({
+        left: targetScrollLeft,
+        behavior: 'smooth'
+      });
+
+      cards.forEach((card, i) => {
+        card.classList.toggle('is-middle', i === activeCardIndex);
+      });
     };
 
-    const scrollProjects = (direction) => {
-      const step = getCardStep();
-      if (!step) return;
+    projectsPrev.addEventListener('click', (e) => {
+      e.preventDefault();
+      centerCard(activeCardIndex - 1);
+    });
 
-      const maxScroll = projectsViewport.scrollWidth - projectsViewport.clientWidth;
-      const atStart = projectsViewport.scrollLeft <= step * 0.5;
-      const atEnd = projectsViewport.scrollLeft >= maxScroll - step * 0.5;
+    projectsNext.addEventListener('click', (e) => {
+      e.preventDefault();
+      centerCard(activeCardIndex + 1);
+    });
 
-      let target;
-      if (direction < 0 && atStart) {
-        target = maxScroll; // wrap to the last card
-      } else if (direction > 0 && atEnd) {
-        target = 0; // wrap to the first card
-      } else {
-        target = projectsViewport.scrollLeft + direction * step;
-      }
+    // Clicking any card directly centers and activates it
+    cards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+        centerCard(index);
+      });
+    });
 
-      target = Math.max(0, Math.min(maxScroll, target));
-      projectsViewport.scrollTo({ left: target, behavior: 'smooth' });
-    };
-
-    projectsPrev.addEventListener('click', () => scrollProjects(-1));
-    projectsNext.addEventListener('click', () => scrollProjects(1));
-
-    // A normal vertical mouse wheel over the carousel should slide it
-    // horizontally (most trackpads/wheels only send deltaY). This also
-    // stops the event from bubbling up to the window-level wheel
-    // listener above, which would otherwise try to flip the whole page
-    // instead of scrolling the cards.
-       projectsViewport.addEventListener('wheel', (e) => {
+    // Prevent main page scroll flip when scrolling horizontally over the carousel
+    projectsViewport.addEventListener('wheel', (e) => {
       e.stopPropagation();
-      const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
-      projectsViewport.scrollLeft += delta;
     }, { passive: true });
 
-    // Continuously figure out which card is actually sitting closest to
-    // the horizontal center of the viewport, and mark only that one as
-    // "the middle card" — it's always the front, zoomed-in one, and
-    // which card that is changes live as you scroll or click the arrows.
-    let highlightRAF = null;
+    // Sync active card on manual scroll or resize
+    let scrollDebounce = null;
+    const updateActiveFromScroll = () => {
+      const viewportCenter = projectsViewport.scrollLeft + projectsViewport.clientWidth / 2;
+      let closestIndex = 0;
+      let minDiff = Infinity;
 
-    const updateMiddleCard = () => {
-      const cards = projectsTrack.querySelectorAll('.project-card');
-      if (!cards.length) return;
-
-      const viewportRect = projectsViewport.getBoundingClientRect();
-      const viewportCenter = viewportRect.left + viewportRect.width / 2;
-
-      let closestCard = null;
-      let closestDistance = Infinity;
-
-      cards.forEach((card) => {
-        const cardRect = card.getBoundingClientRect();
-        const cardCenter = cardRect.left + cardRect.width / 2;
-        const distance = Math.abs(cardCenter - viewportCenter);
-
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestCard = card;
+      cards.forEach((card, i) => {
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        const diff = Math.abs(cardCenter - viewportCenter);
+        if (diff < minDiff) {
+          minDiff = diff;
+          closestIndex = i;
         }
-
-        card.classList.remove('is-middle');
       });
 
-      if (closestCard) closestCard.classList.add('is-middle');
+      if (closestIndex !== activeCardIndex) {
+        activeCardIndex = closestIndex;
+        cards.forEach((card, i) => {
+          card.classList.toggle('is-middle', i === activeCardIndex);
+        });
+      }
     };
 
-    const scheduleUpdateMiddleCard = () => {
-      if (highlightRAF) return;
-      highlightRAF = requestAnimationFrame(() => {
-        updateMiddleCard();
-        highlightRAF = null;
-      });
-    };
+    projectsViewport.addEventListener('scroll', () => {
+      if (scrollDebounce) clearTimeout(scrollDebounce);
+      scrollDebounce = setTimeout(updateActiveFromScroll, 50);
+    }, { passive: true });
 
-    projectsViewport.addEventListener('scroll', scheduleUpdateMiddleCard, { passive: true });
-    window.addEventListener('resize', scheduleUpdateMiddleCard);
-    updateMiddleCard();
+    window.addEventListener('resize', () => {
+      centerCard(activeCardIndex);
+    });
+
+    // Initial centering after render
+    setTimeout(() => {
+      centerCard(0);
+    }, 100);
   }
 
   
