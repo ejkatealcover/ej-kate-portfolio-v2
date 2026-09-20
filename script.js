@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const projectsPrev = document.getElementById('projectsPrev');
   const projectsNext = document.getElementById('projectsNext');
 
-  // Page State: 1 = Centered Editorial Hero, 2 = About, 3 = Services, 4 = Projects, 5 = Skills & Contact
+  // Page State: 1 = Hero, 2 = About, 3 = Services, 4 = Projects, 5 = Skills, 6 = Contact
   let currentPage = 1;
   const MIN_PAGE = 1;
-  const MAX_PAGE = 5;
+  const MAX_PAGE = 6;
   let isTransitioning = false;
   const TRANSITION_DURATION = 1500; // 1.5 seconds, matches --transition-shared
 
@@ -27,8 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
     1: 'Scroll to explore',
     2: 'View services',
     3: 'View projects',
-    4: 'View skills & contact',
-    5: 'Back to top',
+    4: 'View skills',
+    5: 'Get in touch',
+    6: 'Back to top',
   };
 
   // Which nav link should read as "active" for each page state
@@ -38,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     3: '#service',
     4: '#projects',
     5: '#skill',
+    6: '#contact',
   };
 
   // 1. Core State Transition Function (FLIP Shared-Element)
@@ -50,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     currentPage = targetPage;
 
     // Swap the single source-of-truth state class on the stage
-    screenFrame.classList.remove('state-page-1', 'state-page-2', 'state-page-3', 'state-page-4', 'state-page-5');
+    screenFrame.classList.remove('state-page-1', 'state-page-2', 'state-page-3', 'state-page-4', 'state-page-5', 'state-page-6');
     screenFrame.classList.add(`state-page-${currentPage}`);
 
     // Update the scroll/transition prompt copy

@@ -33,7 +33,7 @@
           <li><a href="#service" class="nav-link" data-page="3">Service</a></li>
           <li><a href="#projects" class="nav-link" data-page="4">Projects</a></li>
           <li><a href="#skill" class="nav-link" data-page="5">Skill</a></li>
-          <li><a href="#contact" class="nav-link" data-page="5">Contact</a></li>
+          <li><a href="#contact" class="nav-link" data-page="6">Contact</a></li>
         </ul>
         <button class="mobile-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
           <i class="fa-solid fa-bars-staggered"></i>
@@ -333,22 +333,112 @@
             </li>
           </ul>
         </div>
+      </section>
 
-        <!-- Footer Element: Contact Links pointing to GitHub, LinkedIn, or Email -->
-        <footer id="contact" class="site-footer">
+      <!-- Section 6: Contact Me Section (Dedicated Page 6) -->
+      <section id="contact" class="contact-section page6-contact-container" id="page6Contact">
+        <div class="contact-heading">
+          <div class="intro-badge">
+            <span class="badge-dot">✦</span> Get In Touch
+          </div>
+          <h2 class="contact-title">Let's Work <span class="highlight">Together</span></h2>
+          <p class="contact-subtitle">
+            Have a project in mind or want to collaborate? Send me a message or connect via social platforms below.
+          </p>
+        </div>
+
+        <div class="contact-stage-grid">
+          <!-- Left Column: Contact Cards & Social Links Grid -->
+          <div class="contact-info-col">
+            <div class="contact-card-item primary-email-card">
+              <div class="card-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+              <div class="card-details">
+                <span class="card-label">DIRECT EMAIL</span>
+                <a href="mailto:ejkatealcover.137@gmail.com" class="card-value">ejkatealcover.137@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="status-badge-card">
+              <span class="status-indicator"></span>
+              <span>Available for Web Development & UI Projects</span>
+            </div>
+
+            <div class="socials-cards-grid">
+              <a href="https://github.com/ejkatealcover" target="_blank" rel="noreferrer" class="social-card">
+                <i class="fa-brands fa-github social-card-icon"></i>
+                <div class="social-card-text">
+                  <span class="social-card-name">GitHub</span>
+                  <span class="social-card-handle">@ejkatealcover</span>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square social-card-arrow"></i>
+              </a>
+
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="social-card">
+                <i class="fa-brands fa-linkedin-in social-card-icon"></i>
+                <div class="social-card-text">
+                  <span class="social-card-name">LinkedIn</span>
+                  <span class="social-card-handle">EJ Kate Alcover</span>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square social-card-arrow"></i>
+              </a>
+
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" class="social-card">
+                <i class="fa-brands fa-instagram social-card-icon"></i>
+                <div class="social-card-text">
+                  <span class="social-card-name">Instagram</span>
+                  <span class="social-card-handle">@ejkate</span>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square social-card-arrow"></i>
+              </a>
+
+              <a href="mailto:ejkatealcover.137@gmail.com" class="social-card">
+                <i class="fa-brands fa-discord social-card-icon"></i>
+                <div class="social-card-text">
+                  <span class="social-card-name">Discord</span>
+                  <span class="social-card-handle">ejkate#137</span>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square social-card-arrow"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Glassmorphic Contact Form -->
+          <div class="contact-form-col">
+            <form class="contact-form" id="contactForm" onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent.');">
+              <div class="form-row-two">
+                <div class="form-group">
+                  <label for="formName" class="form-label">Your Name</label>
+                  <input type="text" id="formName" class="form-input" placeholder="e.g. Alex Morgan" required>
+                </div>
+                <div class="form-group">
+                  <label for="formEmail" class="form-label">Your Email</label>
+                  <input type="email" id="formEmail" class="form-input" placeholder="e.g. alex@example.com" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="formSubject" class="form-label">Subject</label>
+                <input type="text" id="formSubject" class="form-input" placeholder="Project Inquiry / Collaboration" required>
+              </div>
+              <div class="form-group">
+                <label for="formMessage" class="form-label">Message</label>
+                <textarea id="formMessage" class="form-textarea" rows="4" placeholder="Tell me about your project or inquiry..." required></textarea>
+              </div>
+              <button type="submit" class="btn-neon-primary btn-submit-form">
+                <span>Send Message</span>
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Semantic Footer Element (Requirement) -->
+        <footer class="site-footer">
           <div class="footer-links">
-            <a href="https://github.com/ejkatealcover" target="_blank" rel="noreferrer" class="footer-link-btn">
+            <a href="https://github.com/ejkatealcover/ej-kate-portfolio-v2" target="_blank" rel="noreferrer" class="footer-link-btn">
               <i class="fa-brands fa-github"></i>
               <span>GitHub Repository</span>
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="footer-link-btn">
-              <i class="fa-brands fa-linkedin-in"></i>
-              <span>LinkedIn Profile</span>
-            </a>
-            <a href="mailto:ejkatealcover.137@gmail.com" class="footer-link-btn">
-              <i class="fa-solid fa-envelope"></i>
-              <span>Email Contact</span>
-            </a>
+            <span class="footer-copyright">© 2026 EJ Kate Alcover. All rights reserved.</span>
           </div>
         </footer>
       </section>
