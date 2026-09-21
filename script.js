@@ -348,4 +348,145 @@ document.addEventListener('DOMContentLoaded', () => {
 
     animateParallax();
   }
+
+  // 11. Interactive Neon Pink Mouse Cursor & Fading Trail System
+  const cursorCanvas = document.getElementById('cursorCanvas');
+  if (cursorCanvas && window.matchMedia('(pointer: fine)').matches) {
+    const ctx = cursorCanvas.getContext('2d');
+    let width = (cursorCanvas.width = window.innerWidth);
+    let height = (cursorCanvas.height = window.innerHeight);
+
+    let mouseX = -100;
+    let mouseY = -100;
+    let lastMouseX = -100;
+    let lastMouseY = -100;
+
+    let cursorX = -100;
+    let cursorY = -100;
+
+    let isHovered = false;
+    const particles = [];
+
+    const resizeCanvas = () => {
+      width = cursorCanvas.width = window.innerWidth;
+      height = cursorCanvas.height = window.innerHeight;
+    };
+
+    window.addEventListener('resize', resizeCanvas);
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      if (cursorX === -100) {
+        cursorX = mouseX;
+        cursorY = mouseY;
+        lastMouseX = mouseX;
+        lastMouseY = mouseY;
+      }
+
+      // Calculate distance moved to interpolate smooth trail particles
+      const dx = mouseX - lastMouseX;
+      const dy = mouseY - lastMouseY;
+      const distance = Math.hypot(dx, dy);
+
+      // Spawn particles along mouse movement path
+      const steps = Math.max(1, Math.floor(distance / 5));
+      for (let i = 0; i < steps; i++) {
+        const px = lastMouseX + (dx * (i / steps));
+        const py = lastMouseY + (dy * (i / steps));
+
+        particles.push({
+          x: px,
+          y: py,
+          size: isHovered ? Math.random() * 5 + 6 : Math.random() * 3 + 4,
+          alpha: 0.95,
+          decay: Math.random() * 0.025 + 0.02, // Smooth fade out
+          shrink: 0.14,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5
+        });
+      }
+
+      lastMouseX = mouseX;
+      lastMouseY = mouseY;
+    });
+
+    // Track interactive hover state for magnetic/glow effect
+    const interactiveSelectors = 'a, button, .project-card, .skill-card, .service-card, .social-card, .form-input, .form-textarea, .indicator-dot, .page-transition-prompt';
+    document.addEventListener('mouseover', (e) => {
+      if (e.target.closest(interactiveSelectors)) {
+        isHovered = true;
+      }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+      if (e.target.closest(interactiveSelectors)) {
+        isHovered = false;
+      }
+    });
+
+    const renderCursor = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      // Smooth spring lag for cursor ring
+      cursorX += (mouseX - cursorX) * 0.35;
+      cursorY += (mouseY - cursorY) * 0.35;
+
+      // Update and draw fading trail particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha -= p.decay;
+        p.size = Math.max(0, p.size - p.shrink);
+
+        if (p.alpha <= 0 || p.size <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+
+        // Core neon pink glowing trace
+        ctx.fillStyle = `rgba(255, 42, 133, ${p.alpha})`;
+        ctx.shadowColor = 'rgba(255, 42, 133, 0.95)';
+        ctx.shadowBlur = p.size * 2.6;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // Draw leading glowing neon pink cursor dot and ring
+      if (mouseX > 0 && mouseY > 0) {
+        ctx.save();
+
+        // Outer Neon Ring
+        const ringRadius = isHovered ? 18 : 10;
+        ctx.beginPath();
+        ctx.arc(cursorX, cursorY, ringRadius, 0, Math.PI * 2);
+        ctx.strokeStyle = isHovered ? 'rgba(255, 42, 133, 0.95)' : 'rgba(255, 42, 133, 0.65)';
+        ctx.lineWidth = isHovered ? 2.2 : 1.5;
+        ctx.shadowColor = 'rgba(255, 42, 133, 1)';
+        ctx.shadowBlur = isHovered ? 22 : 12;
+        ctx.stroke();
+
+        // Inner Core Dot
+        const dotRadius = isHovered ? 5 : 3.5;
+        ctx.beginPath();
+        ctx.arc(mouseX, mouseY, dotRadius, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = 'rgba(255, 42, 133, 1)';
+        ctx.shadowBlur = 14;
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      requestAnimationFrame(renderCursor);
+    };
+
+    renderCursor();
+  }
 });
