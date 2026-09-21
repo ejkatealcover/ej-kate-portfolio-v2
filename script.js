@@ -390,8 +390,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const dy = mouseY - lastMouseY;
       const distance = Math.hypot(dx, dy);
 
-      // Spawn subtle, micro particles along mouse movement path
-      const steps = Math.max(1, Math.floor(distance / 6));
+      // Spawn visible 75% transparent trail particles along mouse movement path
+      const steps = Math.max(1, Math.floor(distance / 4));
       for (let i = 0; i < steps; i++) {
         const px = lastMouseX + (dx * (i / steps));
         const py = lastMouseY + (dy * (i / steps));
@@ -399,12 +399,12 @@ document.addEventListener('DOMContentLoaded', () => {
         particles.push({
           x: px,
           y: py,
-          size: isHovered ? Math.random() * 1.5 + 2.5 : Math.random() * 1.2 + 1.8,
-          alpha: 0.45,
-          decay: Math.random() * 0.04 + 0.08, // Ultra-fast fade out (~100ms)
-          shrink: 0.25,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3
+          size: isHovered ? Math.random() * 3 + 7 : Math.random() * 2.5 + 5,
+          alpha: 0.25, // Exactly 75% transparent (25% visible opacity)
+          decay: Math.random() * 0.015 + 0.022, // Quick fade (~200ms)
+          shrink: 0.18,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4
         });
       }
 
@@ -433,7 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cursorX += (mouseX - cursorX) * 0.4;
       cursorY += (mouseY - cursorY) * 0.4;
 
-      // Update and draw ultra-fast fading micro trail
+      // Update and draw 75% transparent quick-fading trail
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
         p.x += p.vx;
@@ -450,35 +450,35 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
 
-        // Soft translucent pink trace (does not block text readability)
-        ctx.fillStyle = `rgba(255, 42, 133, ${p.alpha * 0.4})`;
-        ctx.shadowColor = 'rgba(255, 42, 133, 0.3)';
-        ctx.shadowBlur = 2;
+        // 75% transparent soft neon pink trail
+        ctx.fillStyle = `rgba(255, 42, 133, ${p.alpha})`;
+        ctx.shadowColor = `rgba(255, 42, 133, ${p.alpha * 0.8})`;
+        ctx.shadowBlur = 4;
         ctx.fill();
         ctx.restore();
       }
 
-      // Draw leading subtle cursor dot and ring
+      // Draw leading glowing cursor dot and ring
       if (mouseX > 0 && mouseY > 0) {
         ctx.save();
 
-        // Outer Subtle Ring
-        const ringRadius = isHovered ? 14 : 7;
+        // Outer Neon Ring
+        const ringRadius = isHovered ? 16 : 9;
         ctx.beginPath();
         ctx.arc(cursorX, cursorY, ringRadius, 0, Math.PI * 2);
-        ctx.strokeStyle = isHovered ? 'rgba(255, 42, 133, 0.65)' : 'rgba(255, 42, 133, 0.35)';
-        ctx.lineWidth = isHovered ? 1.5 : 1;
-        ctx.shadowColor = 'rgba(255, 42, 133, 0.4)';
-        ctx.shadowBlur = isHovered ? 8 : 3;
+        ctx.strokeStyle = isHovered ? 'rgba(255, 42, 133, 0.85)' : 'rgba(255, 42, 133, 0.55)';
+        ctx.lineWidth = isHovered ? 2 : 1.2;
+        ctx.shadowColor = 'rgba(255, 42, 133, 0.6)';
+        ctx.shadowBlur = isHovered ? 12 : 5;
         ctx.stroke();
 
         // Inner Core Dot
-        const dotRadius = isHovered ? 3.5 : 2;
+        const dotRadius = isHovered ? 4 : 2.5;
         ctx.beginPath();
         ctx.arc(mouseX, mouseY, dotRadius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-        ctx.shadowColor = 'rgba(255, 42, 133, 0.6)';
-        ctx.shadowBlur = 4;
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = 'rgba(255, 42, 133, 0.8)';
+        ctx.shadowBlur = 6;
         ctx.fill();
 
         ctx.restore();
