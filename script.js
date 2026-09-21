@@ -64,6 +64,13 @@ document.addEventListener('DOMContentLoaded', () => {
       link.classList.toggle('active', link.getAttribute('href') === activeHref);
     });
 
+    // Recenter project carousel card when switching to Projects page
+    if (currentPage === 4 && typeof window.recenterProjectsCarousel === 'function') {
+      setTimeout(() => {
+        window.recenterProjectsCarousel();
+      }, 300);
+    }
+
     // Release lockout after animation completes
     setTimeout(() => {
       isTransitioning = false;
@@ -288,6 +295,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (scrollDebounce) clearTimeout(scrollDebounce);
       scrollDebounce = setTimeout(updateActiveFromScroll, 50);
     }, { passive: true });
+
+    window.recenterProjectsCarousel = () => {
+      centerCard(activeCardIndex);
+    };
 
     window.addEventListener('resize', () => {
       centerCard(activeCardIndex);

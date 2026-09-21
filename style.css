@@ -1072,7 +1072,7 @@ body {
   min-width: 0;
   overflow-x: auto;
   overflow-y: visible;
-  padding: 1.5rem 0.5rem;
+  padding: 1.8rem 0;
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -1083,17 +1083,18 @@ body {
 }
 
 .projects-track {
+  --card-w: clamp(280px, 28vw, 340px);
   display: flex;
   align-items: center;
   gap: clamp(1.2rem, 2.5vw, 2.2rem);
   width: max-content;
-  padding: 0 calc(50% - 150px);
+  padding: 0 calc(50% - (var(--card-w) / 2));
 }
 
 /* Project Card Box (Bigger & Prominent) */
 .project-card {
   position: relative;
-  flex: 0 0 clamp(280px, 28vw, 340px);
+  flex: 0 0 var(--card-w);
   min-height: clamp(320px, 44vh, 390px);
   display: flex;
   flex-direction: column;
