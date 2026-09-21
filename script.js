@@ -489,4 +489,111 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderCursor();
   }
+
+  // 12. Ambient Floating Constellation & Star Motes Background Animation
+  const bgCanvas = document.getElementById('bgCanvas');
+  if (bgCanvas) {
+    const bgCtx = bgCanvas.getContext('2d');
+    let bgWidth = (bgCanvas.width = bgCanvas.offsetWidth || window.innerWidth);
+    let bgHeight = (bgCanvas.height = bgCanvas.offsetHeight || window.innerHeight);
+
+    let mouseParallaxX = 0;
+    let mouseParallaxY = 0;
+    let currentParallaxX = 0;
+    let currentParallaxY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseParallaxX = (e.clientX / window.innerWidth - 0.5) * 18;
+      mouseParallaxY = (e.clientY / window.innerHeight - 0.5) * 18;
+    });
+
+    const resizeBgCanvas = () => {
+      bgWidth = bgCanvas.width = bgCanvas.offsetWidth || window.innerWidth;
+      bgHeight = bgCanvas.height = bgCanvas.offsetHeight || window.innerHeight;
+    };
+
+    window.addEventListener('resize', resizeBgCanvas);
+
+    // Generate floating ambient star motes
+    const numParticles = Math.min(48, Math.max(25, Math.floor((bgWidth * bgHeight) / 24000)));
+    const bgParticles = [];
+
+    for (let i = 0; i < numParticles; i++) {
+      bgParticles.push({
+        x: Math.random() * bgWidth,
+        y: Math.random() * bgHeight,
+        radius: Math.random() * 1.5 + 0.8,
+        baseAlpha: Math.random() * 0.22 + 0.1,
+        alpha: Math.random() * 0.22 + 0.1,
+        pulseSpeed: Math.random() * 0.015 + 0.005,
+        pulseAngle: Math.random() * Math.PI * 2,
+        vx: (Math.random() - 0.5) * 0.22,
+        vy: (Math.random() - 0.5) * 0.22 - 0.06,
+        color: Math.random() > 0.35 ? '255, 42, 133' : '255, 255, 255'
+      });
+    }
+
+    const animateBg = () => {
+      bgCtx.clearRect(0, 0, bgWidth, bgHeight);
+
+      currentParallaxX += (mouseParallaxX - currentParallaxX) * 0.04;
+      currentParallaxY += (mouseParallaxY - currentParallaxY) * 0.04;
+
+      // Draw faint geometric constellation lines between close ambient motes
+      for (let i = 0; i < bgParticles.length; i++) {
+        for (let j = i + 1; j < bgParticles.length; j++) {
+          const dx = bgParticles[i].x - bgParticles[j].x;
+          const dy = bgParticles[i].y - bgParticles[j].y;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < 125) {
+            const lineAlpha = (1 - dist / 125) * 0.08;
+            bgCtx.save();
+            bgCtx.beginPath();
+            bgCtx.moveTo(bgParticles[i].x + currentParallaxX * 0.4, bgParticles[i].y + currentParallaxY * 0.4);
+            bgCtx.lineTo(bgParticles[j].x + currentParallaxX * 0.4, bgParticles[j].y + currentParallaxY * 0.4);
+            bgCtx.strokeStyle = `rgba(255, 42, 133, ${lineAlpha})`;
+            bgCtx.lineWidth = 0.75;
+            bgCtx.stroke();
+            bgCtx.restore();
+          }
+        }
+      }
+
+      // Update and draw floating ambient star motes
+      bgParticles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Wrap around screen boundaries smoothly
+        if (p.x < -20) p.x = bgWidth + 20;
+        if (p.x > bgWidth + 20) p.x = -20;
+        if (p.y < -20) p.y = bgHeight + 20;
+        if (p.y > bgHeight + 20) p.y = -20;
+
+        // Gentle breathing pulse
+        p.pulseAngle += p.pulseSpeed;
+        p.alpha = p.baseAlpha + Math.sin(p.pulseAngle) * 0.07;
+
+        const drawX = p.x + currentParallaxX;
+        const drawY = p.y + currentParallaxY;
+
+        bgCtx.save();
+        bgCtx.beginPath();
+        bgCtx.arc(drawX, drawY, p.radius, 0, Math.PI * 2);
+        bgCtx.fillStyle = `rgba(${p.color}, ${Math.max(0, p.alpha)})`;
+        bgCtx.shadowColor = `rgba(${p.color}, ${p.alpha * 0.7})`;
+        bgCtx.shadowBlur = p.radius * 2.5;
+        bgCtx.fill();
+        bgCtx.restore();
+      });
+
+      requestAnimationFrame(animateBg);
+    };
+
+    setTimeout(() => {
+      resizeBgCanvas();
+      animateBg();
+    }, 150);
+  }
 });

@@ -348,6 +348,16 @@ body {
   overflow: hidden;
 }
 
+.bg-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .bg-waves {
   position: absolute;
   top: 0;
@@ -372,7 +382,8 @@ body {
   height: 60vh;
   top: 20%;
   left: -15vw;
-  background: radial-gradient(circle, rgba(255, 42, 133, 0.05) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 42, 133, 0.08) 0%, transparent 70%);
+  animation: wave-float-1 14s ease-in-out infinite alternate;
 }
 
 .wave-2 {
@@ -380,7 +391,20 @@ body {
   height: 65vh;
   top: 15%;
   right: -15vw;
-  background: radial-gradient(circle, rgba(255, 42, 133, 0.05) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 42, 133, 0.07) 0%, transparent 70%);
+  animation: wave-float-2 16s ease-in-out infinite alternate;
+}
+
+@keyframes wave-float-1 {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-35px) scale(1.06); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes wave-float-2 {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(40px) scale(1.08); }
+  100% { transform: translateY(0) scale(1); }
 }
 
 .center-magenta-glow {
@@ -390,12 +414,24 @@ body {
   transform: translate(-50%, -50%);
   width: min(650px, 75vw);
   height: min(650px, 75vw);
-  background: radial-gradient(circle, rgba(255, 42, 133, 0.12) 0%, rgba(140, 8, 65, 0.03) 45%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 42, 133, 0.14) 0%, rgba(140, 8, 65, 0.04) 45%, transparent 70%);
   border-radius: 50%;
   filter: blur(60px);
   pointer-events: none;
   z-index: 1;
+  animation: center-glow-pulse 10s ease-in-out infinite alternate;
   transition: left var(--transition-shared), transform var(--transition-shared), opacity var(--transition-fade);
+}
+
+@keyframes center-glow-pulse {
+  0% {
+    opacity: 0.12;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+  100% {
+    opacity: 0.22;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
 }
 
 .state-page-2 .center-magenta-glow {
