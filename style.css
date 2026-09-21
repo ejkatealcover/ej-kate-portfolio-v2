@@ -1743,6 +1743,11 @@ body {
   line-height: 1.1;
 }
 
+.skills-title .highlight {
+  color: var(--neon-pink);
+  text-shadow: 0 0 14px rgba(255, 42, 133, 0.7);
+}
+
 .skills-subtitle {
   font-family: var(--font-sans);
   font-size: clamp(0.78rem, 0.95vw, 0.95rem);
@@ -1926,6 +1931,11 @@ body {
   font-weight: 900;
   color: #ffffff;
   line-height: 1.1;
+}
+
+.contact-title .highlight {
+  color: var(--neon-pink);
+  text-shadow: 0 0 14px rgba(255, 42, 133, 0.7);
 }
 
 .contact-subtitle {
