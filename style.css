@@ -1176,7 +1176,7 @@ body {
 /* Cover Photo Container (for adding custom cover images later) */
 .project-cover-photo {
   width: 100%;
-  height: clamp(120px, 16vh, 160px);
+  height: clamp(135px, 18vh, 170px);
   border-radius: 16px;
   overflow: hidden;
   position: relative;
@@ -1185,37 +1185,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   transition: border-color 0.3s ease;
 }
 
-.cover-photo-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  color: rgba(255, 42, 133, 0.5);
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  transition: color 0.3s ease;
-}
-
-.cover-photo-placeholder i {
-  font-size: 1.6rem;
-  text-shadow: 0 0 10px rgba(255, 42, 133, 0.4);
-}
-
-.project-card:hover .cover-photo-placeholder {
-  color: var(--neon-pink);
-}
-
-/* Cover image if added by user later */
-.project-cover-photo img {
+.cover-photo-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top center;
   display: block;
+  transition: transform 0.4s var(--ease-spring);
+}
+
+.project-card:hover .cover-photo-img {
+  transform: scale(1.06);
 }
 
 .project-card-info {
