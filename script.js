@@ -71,6 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 300);
     }
 
+    // Trigger section title typing transition for Pages 3, 4, 5, and 6
+    if (typeof triggerTypingTransition === 'function') {
+      triggerTypingTransition(currentPage);
+    }
+
     // Release lockout after animation completes
     setTimeout(() => {
       isTransitioning = false;
@@ -595,5 +600,67 @@ document.addEventListener('DOMContentLoaded', () => {
       resizeBgCanvas();
       animateBg();
     }, 150);
+  }
+
+  // 13. Dynamic Typing Transition for Section Titles (Page 3, 4, 5 & 6)
+  const SECTION_TITLES = {
+    3: { selector: '.services-title', plain: 'My ', highlight: 'Services' },
+    4: { selector: '.projects-title', plain: 'Featured ', highlight: 'Projects' },
+    5: { selector: '.skills-title', plain: 'Skills & ', highlight: 'Interests' },
+    6: { selector: '.contact-title', plain: "Let's Work ", highlight: 'Together' }
+  };
+
+  let activeTypingTimeouts = [];
+
+  function triggerTypingTransition(page) {
+    // Clear any previous typing animation timeouts
+    activeTypingTimeouts.forEach(t => clearTimeout(t));
+    activeTypingTimeouts = [];
+
+    const config = SECTION_TITLES[page];
+    if (!config) return;
+
+    const titleEl = document.querySelector(config.selector);
+    if (!titleEl) return;
+
+    // Prepare container spans with glowing cursor
+    titleEl.innerHTML = '<span class="plain-text"></span><span class="highlight"></span><span class="typing-cursor"></span>';
+
+    const plainSpan = titleEl.querySelector('.plain-text');
+    const highlightSpan = titleEl.querySelector('.highlight');
+    const cursorSpan = titleEl.querySelector('.typing-cursor');
+
+    const fullPlain = config.plain;
+    const fullHighlight = config.highlight;
+    let index = 0;
+    const totalLength = fullPlain.length + fullHighlight.length;
+
+    function typeChar() {
+      if (index <= fullPlain.length) {
+        plainSpan.textContent = fullPlain.substring(0, index);
+      } else {
+        plainSpan.textContent = fullPlain;
+        const highlightIndex = index - fullPlain.length;
+        highlightSpan.textContent = fullHighlight.substring(0, highlightIndex);
+      }
+
+      index++;
+      if (index <= totalLength) {
+        const timeout = setTimeout(typeChar, 42 + Math.random() * 20);
+        activeTypingTimeouts.push(timeout);
+      } else {
+        // Fade out cursor after typing completes
+        const finishTimeout = setTimeout(() => {
+          if (cursorSpan) {
+            cursorSpan.style.transition = 'opacity 0.4s ease';
+            cursorSpan.style.opacity = '0';
+          }
+        }, 1200);
+        activeTypingTimeouts.push(finishTimeout);
+      }
+    }
+
+    const startDelay = setTimeout(typeChar, 200);
+    activeTypingTimeouts.push(startDelay);
   }
 });
