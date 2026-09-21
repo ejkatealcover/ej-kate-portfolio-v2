@@ -211,8 +211,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = Array.from(projectsTrack.querySelectorAll('.project-card'));
     const indicators = Array.from(document.querySelectorAll('.indicator-dot'));
     let activeCardIndex = 0;
+    let isProgrammaticScrolling = false;
+    let scrollTimeout = null;
 
-    const centerCard = (index) => {
+    const centerCard = (index, smooth = true) => {
       if (!cards.length) return;
       activeCardIndex = (index + cards.length) % cards.length;
 
@@ -222,10 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const viewportWidth = projectsViewport.clientWidth;
       const targetScrollLeft = cardLeft - (viewportWidth / 2) + (cardWidth / 2);
 
-      projectsViewport.scrollTo({
-        left: targetScrollLeft,
-        behavior: 'smooth'
-      });
+      isProgrammaticScrolling = true;
 
       cards.forEach((card, i) => {
         card.classList.toggle('is-middle', i === activeCardIndex);
@@ -233,29 +232,39 @@ document.addEventListener('DOMContentLoaded', () => {
       indicators.forEach((dot, i) => {
         dot.classList.toggle('active', i === activeCardIndex);
       });
+
+      projectsViewport.scrollTo({
+        left: targetScrollLeft,
+        behavior: smooth ? 'smooth' : 'auto'
+      });
+
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isProgrammaticScrolling = false;
+      }, 450);
     };
 
     projectsPrev.addEventListener('click', (e) => {
       e.preventDefault();
-      centerCard(activeCardIndex - 1);
+      centerCard(activeCardIndex - 1, true);
     });
 
     projectsNext.addEventListener('click', (e) => {
       e.preventDefault();
-      centerCard(activeCardIndex + 1);
+      centerCard(activeCardIndex + 1, true);
     });
 
     // Indicator dot clicks
     indicators.forEach((dot, index) => {
       dot.addEventListener('click', () => {
-        centerCard(index);
+        centerCard(index, true);
       });
     });
 
     // Clicking any card directly centers and activates it
     cards.forEach((card, index) => {
       card.addEventListener('click', () => {
-        centerCard(index);
+        centerCard(index, true);
       });
     });
 
@@ -267,6 +276,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sync active card on manual scroll or resize
     let scrollDebounce = null;
     const updateActiveFromScroll = () => {
+      if (isProgrammaticScrolling) return;
+
       const viewportCenter = projectsViewport.scrollLeft + projectsViewport.clientWidth / 2;
       let closestIndex = 0;
       let minDiff = Infinity;
@@ -292,22 +303,26 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     projectsViewport.addEventListener('scroll', () => {
+      if (isProgrammaticScrolling) return;
       if (scrollDebounce) clearTimeout(scrollDebounce);
       scrollDebounce = setTimeout(updateActiveFromScroll, 50);
     }, { passive: true });
 
     window.recenterProjectsCarousel = () => {
-      centerCard(activeCardIndex);
+      centerCard(activeCardIndex, false);
     };
 
     window.addEventListener('resize', () => {
-      centerCard(activeCardIndex);
+      centerCard(activeCardIndex, false);
     });
 
     // Initial centering after render
     setTimeout(() => {
-      centerCard(0);
+      centerCard(0, false);
     }, 100);
+    setTimeout(() => {
+      centerCard(0, false);
+    }, 350);
   }
 
   

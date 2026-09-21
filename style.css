@@ -1034,11 +1034,14 @@ body {
   position: relative;
   display: flex;
   align-items: center;
-  gap: clamp(0.6rem, 1.5vw, 1.4rem);
+  justify-content: center;
   width: 100%;
 }
 
 .carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   flex-shrink: 0;
   width: clamp(44px, 3.6vw, 54px);
   height: clamp(44px, 3.6vw, 54px);
@@ -1046,28 +1049,37 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 42, 133, 0.12);
+  background: rgba(18, 4, 14, 0.85);
   border: 1.8px solid var(--neon-pink);
   color: var(--neon-pink);
   font-size: clamp(1rem, 1.2vw, 1.25rem);
   cursor: pointer;
-  z-index: 20;
+  z-index: 25;
   box-shadow: 0 0 20px rgba(255, 42, 133, 0.4);
   transition: all 0.3s var(--ease-spring);
+}
+
+.carousel-prev {
+  left: -20px;
+}
+
+.carousel-next {
+  right: -20px;
 }
 
 .carousel-arrow:hover {
   background: var(--neon-pink);
   color: #080106;
   box-shadow: 0 0 32px rgba(255, 42, 133, 0.95);
-  transform: scale(1.12);
+  transform: translateY(-50%) scale(1.12);
 }
 
 .carousel-arrow:active {
-  transform: scale(0.92);
+  transform: translateY(-50%) scale(0.92);
 }
 
 .projects-viewport {
+  width: 100%;
   flex: 1;
   min-width: 0;
   overflow-x: auto;
@@ -1084,6 +1096,7 @@ body {
 
 .projects-track {
   --card-w: clamp(280px, 28vw, 340px);
+  position: relative;
   display: flex;
   align-items: center;
   gap: clamp(1.2rem, 2.5vw, 2.2rem);
